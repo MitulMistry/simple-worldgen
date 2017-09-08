@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 public class CLI {
-	Scanner scanner = new Scanner(System.in); //for input
+	Scanner intScanner = new Scanner(System.in); //for integer input
+	Scanner textScanner = new Scanner(System.in); //for text, string input - separate scanners to avoid input issues
 	World currentWorld;
 
 	public static void main(String[] args) { //run program
@@ -23,7 +24,7 @@ public class CLI {
 				System.out.println("3. Display current world");
 			}
 			
-			input = scanner.nextInt();
+			input = intScanner.nextInt();
 			this.processMenuInput(input);
 		} while (input != 2);
 		
@@ -34,8 +35,6 @@ public class CLI {
 		switch (input) {
 			case 1:
 				this.runWorldGeneration();
-//				System.out.println("Generating world...");
-//				currentWorld = new World();
 				break;
 			
 			case 2:
@@ -65,7 +64,7 @@ public class CLI {
 			System.out.println("1. Auto-generate");
 			System.out.println("2. Define parameters");
 			System.out.println("3. Cancel");
-			input = scanner.nextInt();
+			input = intScanner.nextInt();
 			
 			if (input == 1) {
 				System.out.println("Generating world...");
@@ -88,7 +87,7 @@ public class CLI {
 		
 		do {
 			System.out.println("World name:");
-			strInput = scanner.nextLine();
+			strInput = textScanner.nextLine();
 		} while (strInput == null);
 		
 		worldName = strInput;
@@ -98,8 +97,12 @@ public class CLI {
 	}
 	
 	private void terminateCLI() {
-		if (scanner != null) {
-			scanner.close();
+		if (intScanner != null) {
+			intScanner.close();
+		}
+		
+		if (textScanner != null) {
+			textScanner.close();
 		}
 		
 		System.exit(0);
